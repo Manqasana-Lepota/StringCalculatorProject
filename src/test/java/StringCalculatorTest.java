@@ -45,7 +45,7 @@ public class StringCalculatorTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void AddThatHandlesNegativeIntegers() {
-        testResults = calc.Add("-1,-4");
+        testResults = calc.Add("-4");
     }
     @Test
     public void AddThatIgnoreIntegerGreaterOrEquals1000 () {
@@ -53,4 +53,11 @@ public class StringCalculatorTest {
         expectedResults = 3;
         Assert.assertEquals(expectedResults,testResults);
     }
+    @Test
+    public void AddSupportsDelimiterLength() {
+        testResults = calc.Add("//***\n1***2***3");
+        expectedResults = 6;
+        Assert.assertEquals(expectedResults,testResults);
+    }
+
 }

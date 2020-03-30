@@ -33,27 +33,25 @@ public class StringCalculator {
         }
     }
 
-    private int Sum(String[] numbers) throws IllegalArgumentException {
+    public int Sum(String[] numbers) throws IllegalArgumentException {
         int sum = 0;
-        ArrayList<Integer> negatives = new ArrayList<Integer>();
+
+        ArrayList<Integer> negativeNumbers = new ArrayList<Integer>();
+
         for (int i = 0; i < numbers.length; i++) {
             if (Integer.parseInt(numbers[i]) < 0) {
-                negatives.add(Integer.parseInt(numbers[i]));
+                negativeNumbers.add(Integer.parseInt(numbers[i]));
             }
             if (Integer.parseInt(numbers[i]) >= 1000) {
                 continue;
             } else
                 sum += Integer.parseInt(numbers[i]);
         }
-        if (negatives.isEmpty()) {
-            return sum;
-        } else {
-            String negativeNumbers = "";
-            for (Integer number : negatives) {
-                negativeNumbers += number.toString() + " ";
-            }
+        if (!negativeNumbers.isEmpty()) {
             throw new IllegalArgumentException("Negatives not allowed : " + negativeNumbers);
         }
+            return sum;
+
     }
     public static void main(String[] args) {
 
@@ -66,7 +64,8 @@ public class StringCalculator {
         System.out.println("Sum of numbers with lines between : " + cal.Add("1\n2,3"));
         System.out.println("Sum of numbers with different delimiters : " + cal.Add("//;\n1;2"));
         System.out.println("Sum that handles greater or equals integer : " + cal.Add("1000,1,2,1001"));
-        System.out.println("Sum that handles negative integer : " + cal.Add("-3,-4"));
+        System.out.println("Sum that supports delimiter length : " + cal.Add("//***\n1***2***3"));
+        System.out.println("Sum that handles negative integer : " + cal.Add("-4,-1"));
     }
 }
 
